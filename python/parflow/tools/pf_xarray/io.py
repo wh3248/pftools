@@ -384,6 +384,7 @@ class ParflowBinaryReader:
             x0, y0, z0 = x0 - x_min, y0 - y_min, z0 - z_min
             dx, dy, dz = self.subgrid_shapes[subgrid_idx]
             x1, y1, z1 = x0 + dx, y0 + dy, z0+ dz
+            print(f"Subgrid {subgrid_idx} xyz=({x0},{y0},{z0}), dxyz=({dx},{dy},{dz}) xyz=({x1},{y1},{z1})")
             bounding_data[x0:x1, y0:y1, z0:z1] = self.iloc_subgrid(subgrid_idx)
 
         # Now clip out the exact part from the bounding box
@@ -498,6 +499,7 @@ class ParflowBinaryReader:
             for i in range(self.header['n_subgrids']):
                 nx, ny, nz = self.subgrid_shapes[i]
                 ix, iy, iz = self.subgrid_start_indices[i]
+                print(f"Read Subgrid {self.header['n_subgrids']} ixyz=({ix},{iy},{iz}), nxyz=({nx},{ny},{nz}) ")
                 if z_first:
                     all_data[iz:iz+nz, iy:iy+ny, ix:ix+nx] = self.iloc_subgrid(i).T
                 else:

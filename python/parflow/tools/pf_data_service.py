@@ -1,4 +1,5 @@
 import xarray as xr
+import os
 
 class PFDataService:
     """
@@ -43,7 +44,8 @@ class PFDataService:
         """
 
         result = None
-        da = xr.open_dataarray(str(file_name), name='xxdefault_single', engine=self.parflow_backend_entrypoint_class)
+        name = os.path.basename(file_name)
+        da = xr.open_dataarray(str(file_name), name=name, engine=self.parflow_backend_entrypoint_class)
 
         return da
 
